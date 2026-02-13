@@ -32,7 +32,7 @@ void RenderSystem::update(const float alpha)
 		position = utils::lerp(alpha, renderable.last_position, renderable.current_position);
 
 		shape.setRadius(body.size);
-		shape.setOrigin(shape.getRadius(), shape.getRadius());
+		shape.setOrigin(sf::Vector2f(shape.getRadius(), shape.getRadius()));
 		shape.setPosition(position);
 		shape.setOutlineColor(sf::Color::Black);
 		shape.setFillColor(colorable.color);

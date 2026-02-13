@@ -16,7 +16,7 @@ MoveSystem::MoveSystem()
 void MoveSystem::update(const float dt)
 {
 	registry->view<Body>().each([&](auto entity, Body &body) {
-		if (registry->has<Lerpable>(entity))
+		if (registry->all_of<Lerpable>(entity))
 		{
 			auto& lerpable = registry->get<Lerpable>(entity);
 			lerpable.time += dt * 0.5f;
@@ -26,7 +26,7 @@ void MoveSystem::update(const float dt)
 				registry->remove<Lerpable>(entity);
 				
 		}
-		else if (!registry->has<Holdable>(entity))
+		else if (!registry->all_of<Holdable>(entity))
 			body.position += body.direction * dt;
 	});
 }

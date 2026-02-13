@@ -38,8 +38,8 @@ sf::FloatRect UserSystem::generateRect(const sf::Vector2f& position)
 {
 	const float size = 200;
 	sf::FloatRect rect(position, sf::Vector2f(size, size));
-	rect.top -= size * 0.5f;
-	rect.left -= size * 0.5f;
+	rect.position.y -= size * 0.5f;
+	rect.position.x -= size * 0.5f;
 
 	return rect;
 }
@@ -60,10 +60,10 @@ void UserSystem::receive(const GameEvent::SpawnBall &event)
 	float size = Body::MIN_START_SIZE + static_cast<float>(std::rand() % 2);
 
 	auto entity = registry->create();
-	registry->assign<Body>(entity, position, direction * static_cast<float>(Body::SPEED), size);
-	registry->assign<Colorable>(entity);
-	registry->assign<Teleportable>(entity);
-	registry->assign<Renderable>(entity, position);
+	registry->emplace<Body>(entity, position, direction * static_cast<float>(Body::SPEED), size);
+	registry->emplace<Colorable>(entity);
+	registry->emplace<Teleportable>(entity);
+	registry->emplace<Renderable>(entity, position);
 }
 
 void UserSystem::receive(const GameEvent::SpawnPortal &event)
@@ -71,10 +71,10 @@ void UserSystem::receive(const GameEvent::SpawnPortal &event)
 	static int e_link = -1; // todo remove this dirty flag
 
 	auto entity = registry->create();
-	registry->assign<Body>(entity, event.position, sf::Vector2f(), (float)Body::PORTAL_SIZE);
-	registry->assign<Portal>(entity);
-	registry->assign<Colorable>(entity);
-	registry->assign<Renderable>(entity, event.position);
+	registry->emplace<Body>(entity, event.position, sf::Vector2f(), (float)Body::PORTAL_SIZE);
+	registry->emplace<Portal>(entity);
+	registry->emplace<Colorable>(entity);
+	registry->emplace<Renderable>(entity, event.position);
 
 	auto& c = registry->get<Colorable>(entity);
 	c.color = sf::Color(20, 20, 40);
@@ -100,14 +100,14 @@ void UserSystem::receive(const GameEvent::FreeArea &event)
 	
 	registry->view<Body, Colorable>().each([&](auto entity, Body &body, Colorable& colorable)
 	{ 
-		if (!registry->has<Portal>(entity) && border.contains(body.position))
+		if (!registry->any_of<Portal>(entity) && border.contains(body.position))
 			if (event.collapse)
 			{
 				colorable.color = sf::Color(123, 212, 80);
 				colorable.decay = sf::seconds(3);
 				colorable.timer = sf::Time::Zero;
 
-				registry->accommodate<Lerpable>(entity, event.position);
+				registry->emplace<Lerpable>(entity, event.position);
 			}
 			else
 				registry->destroy(entity);
@@ -141,12 +141,12 @@ void UserSystem::receive(const GameEvent::EscapeFromArea &event)
 
 		registry->view<Body, Colorable>().each([&](auto entity, Body &body, Colorable& colorable)
 		{
-			if (!registry->has<Portal>(entity) && border.contains(body.position))
+			if (!registry->any_of<Portal>(entity) && border.contains(body.position))
 			{
 				colorable.color = sf::Color(194, 177, 128);
 				colorable.decay = sf::seconds(2048);
 
-				registry->assign<Holdable>(entity);
+				registry->emplace<Holdable>(entity);
 			}
 
 		});

@@ -23,7 +23,7 @@ void Teleportsystem::receive(const GameEvent::Teleport &event)
 {
 // FIXME
 #if 0
-	if (!registry->has<Teleportable>(event.who))
+	if (!registry->any_of<Teleportable>(event.who))
 		return;
 
 	auto destination_portal = registry->get<Portal>(event.where).link;

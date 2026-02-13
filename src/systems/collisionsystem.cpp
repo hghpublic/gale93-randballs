@@ -86,8 +86,8 @@ void CollisionSystem::ballToBall(unsigned int ent, GameComponent::Body& body, un
 		body2.direction *= Body::SPEED / b2speed;
 
 
-	auto &colorable = registry->get<Colorable>(ent);
-	auto &colorable2 = registry->get<Colorable>(ent2);
+	auto &colorable = registry->get<Colorable>(static_cast<entt::entity>(ent));
+	auto &colorable2 = registry->get<Colorable>(static_cast<entt::entity>(ent2));
 
 	if (colorable.color == colorable2.color)
 	{
@@ -103,8 +103,8 @@ void CollisionSystem::ballToBall(unsigned int ent, GameComponent::Body& body, un
 		{
 			auto _e = body.size > body2.size ? ent2 : ent;
 			
-			if (registry->valid(_e))
-				registry->destroy(_e);
+			if (registry->valid(static_cast<entt::entity>(_e)))
+				registry->destroy(static_cast<entt::entity>(_e));
 		}
 	}
 }
@@ -117,34 +117,34 @@ void CollisionSystem::update(const float dt)
 	auto view = registry->view<Body>();
 	for (auto entity : view)
 	{
-		auto &body = view.get(entity);
+		auto &body = view.get<Body>(entity);
 		borders_check(body, borders);
 
 		auto quad = static_cast<sf::Vector2i>(body.position) / 400;
-		quadtree[quad.x + 100 * quad.y].push_back(entity);
+		quadtree[quad.x + 100 * quad.y].push_back(static_cast<unsigned int>(entity));
 	}
 
 	for (auto& area : quadtree)
 		for (auto it = area.second.begin(); it != area.second.end(); it++)
 		{
-			if (!registry->valid(*it))
+			if (!registry->valid(static_cast<entt::entity>(*it)))
 				continue;
 
-			auto &body = view.get(*it);
-
-			for (auto it2 = it + 1; it2 != area.second.end(); it2++)
-			{
-				if (!registry->valid(*it) || !registry->valid(*it2))
-					continue;
-
-				auto &body2 = view.get(*it2);
+			auto &body = view.get<Body>(static_cast<entt::entity>(*it));
+	
+				for (auto it2 = it + 1; it2 != area.second.end(); it2++)
+				{
+					if (!registry->valid(static_cast<entt::entity>(*it)) || !registry->valid(static_cast<entt::entity>(*it2)))
+						continue;
+	
+					auto &body2 = view.get<Body>(static_cast<entt::entity>(*it2));
 
 				if (isColliding(body, body2))
 				{
-					if (registry->has<Portal>(*it))
-						eventDispatcher->trigger<GameEvent::Teleport>(*it2, *it);
-					else if (registry->has<Portal>(*it2))
-						eventDispatcher->trigger<GameEvent::Teleport>(*it, *it2);
+					if (registry->any_of<Portal>(static_cast<entt::entity>(*it)))
+						eventDispatcher->trigger(GameEvent::Teleport(*it2, *it));
+					else if (registry->any_of<Portal>(static_cast<entt::entity>(*it2)))
+						eventDispatcher->trigger(GameEvent::Teleport(*it, *it2));
 					else
 						ballToBall(*it, body, *it2, body2);
 				}
