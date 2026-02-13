@@ -7,15 +7,15 @@ class BaseSystem
 {
 protected:
 	class Engine* engine;
-	entt::DefaultRegistry* registry;
-	entt::Dispatcher* eventDispatcher;
+	entt::registry* registry;
+	entt::dispatcher* eventDispatcher;
 
 	inline virtual void onInit() {}
 public:
 	BaseSystem();
 	~BaseSystem();
 
-	void init(Engine *e, entt::DefaultRegistry& r, entt::Dispatcher& d);
+	void init(Engine *e, entt::registry& r, entt::dispatcher& d);
 
 	virtual void update(const float dt);
 };

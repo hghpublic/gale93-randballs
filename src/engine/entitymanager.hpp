@@ -5,8 +5,8 @@
 class EntityManager
 {
 	class Engine *engine;
-	entt::DefaultRegistry registry;
-	entt::Dispatcher eventDispatcher;
+	entt::registry registry;
+	entt::dispatcher eventDispatcher;
 
 	std::vector<std::unique_ptr<BaseSystem>> systems;
 	std::vector<std::unique_ptr<BaseSystem>> render_systems;
@@ -22,6 +22,6 @@ public:
 	void addSystem(std::unique_ptr<BaseSystem>);
 	void addRenderSystem(std::unique_ptr<BaseSystem>);
 
-	inline entt::DefaultRegistry *getDefaultRegistry() { return &registry; }
-	inline entt::Dispatcher *getEventDispatcher() { return &eventDispatcher; }
+	inline entt::registry *getDefaultRegistry() { return &registry; }
+	inline entt::dispatcher *getEventDispatcher() { return &eventDispatcher; }
 };
