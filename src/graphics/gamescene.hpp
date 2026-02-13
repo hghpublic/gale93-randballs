@@ -4,6 +4,7 @@
 #include "engine/entitymanager.hpp"
 
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Font.hpp>
 
 class GameScene : public Scene
 {
