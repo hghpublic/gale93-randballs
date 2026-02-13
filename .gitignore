@@ -334,3 +334,6 @@ ASALocalRun/
 
 # CMake build temporary files
 build/*
+
+# macos
+.DS_Store
