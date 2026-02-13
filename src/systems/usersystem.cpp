@@ -134,7 +134,11 @@ void UserSystem::receive(const GameEvent::EscapeFromArea &event)
 			colorable.timer = sf::Time::Zero;
 		}
 
-		registry->reset<Holdable>();
+		auto holdableView = registry->view<Holdable>();
+		for (auto entity : holdableView)
+		{
+			registry->remove<Holdable>(entity);
+		}
 		ready = true;
 	}
 	else if (ready == true)
