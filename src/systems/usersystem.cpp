@@ -81,7 +81,8 @@ void UserSystem::receive(const GameEvent::SpawnPortal &event)
 	c.color = sf::Color(20, 20, 40);
 	c.decay = sf::seconds(65536);
 
-
+// FIXME
+#if 0
 	if (e_link != -1)
 	{
 		registry->get<Portal>(entity).link = e_link;
@@ -91,7 +92,7 @@ void UserSystem::receive(const GameEvent::SpawnPortal &event)
 	}
 	else
 		e_link = entity;
-		
+#endif	
 }
 
 
