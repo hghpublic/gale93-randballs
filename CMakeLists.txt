@@ -1,56 +1,57 @@
-cmake_minimum_required(VERSION 3.0)
-project(RANDBALLS)
+cmake_minimum_required(VERSION 4.2)
 
-###################################################################
-# General Setting
+project(RANDBALLS LANGUAGES CXX)
 
-# configure general include
-include_directories(src/)
+# if using valgrind, set BUILD_WITH_ASAN to OFF
+option(BUILD_WITH_ASAN "Build with ASAN" OFF)
 
-# configure compiler command
-if(CMAKE_BUILD_TYPE STREQUAL "")
-  set(CMAKE_BUILD_TYPE Debug)
+find_package(EnTT CONFIG REQUIRED)
+# target_link_libraries(${target} PRIVATE EnTT::EnTT)
+find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
+# target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
+# target_link_libraries(${target} PRIVATE SFML::Main)
+
+# libraries
+
+add_subdirectory(src)
+
+# randballs executable
+
+set(target randballs)
+add_executable(${target})
+target_compile_features(${target} PRIVATE cxx_std_26)
+target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
+target_link_libraries(${target} PRIVATE EnTT::EnTT)
+target_link_libraries(${target} PRIVATE engine graphics systems)
+target_sources(${target} PRIVATE
+    src/main.cpp
+)
+if(BUILD_WITH_ASAN)
+    target_compile_options(${target} PRIVATE -fsanitize=address)
+    target_link_options(${target} PRIVATE -fsanitize=address)
 endif()
 
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3 -coverage")
-endif()
+# copy media
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++17 ")
+add_custom_command(TARGET ${target} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory 
+        ${CMAKE_CURRENT_SOURCE_DIR}/media
+        $<TARGET_FILE_DIR:${target}>/media)
 
-###################################################################
-# Build SFML 2.4.2 submodule
-# URL: https://github.com/SFML/SFML.git
 
-add_subdirectory(external/SFML)
+# valgrind target
 
-###################################################################
-# Build EnTT 3.3.0 submodule
-# URL: https://github.com/skypjack/entt.git
-set(USE_LIBCPP OFF)
-add_subdirectory(external/entt)
-
-###################################################################
-#  Systems Library
-file(GLOB_RECURSE SYSTEMS_SRC src/systems/*.cpp)
-add_library(systems ${SYSTEMS_SRC})
-target_link_libraries(systems PUBLIC sfml-system sfml-graphics sfml-window EnTT)
-# target_include_directories(systems PUBLIC src/graphics/)
-
-###################################################################
-#  Graphics Library
-file(GLOB_RECURSE GRAPHICS_SRC src/graphics/*.cpp)
-add_library(graphics ${GRAPHICS_SRC})
-target_link_libraries(graphics PUBLIC sfml-system sfml-graphics sfml-window EnTT)
-target_include_directories(graphics PUBLIC src/graphics/)
-
-###################################################################
-# Engine Library
-file(GLOB_RECURSE ENGINE_SRC src/engine/*.cpp)
-add_library(engine ${ENGINE_SRC})
-target_link_libraries(engine PUBLIC sfml-system sfml-graphics sfml-window EnTT)
-
-###################################################################
-# Engine Library
-add_executable(randballs src/main.cpp)
-target_link_libraries(randballs PUBLIC engine graphics systems)
+add_custom_target(valgrind
+    COMMAND valgrind
+        --leak-check=full
+        --show-leak-kinds=all
+        --track-origins=yes
+        -s --suppressions=$ENV{DEV_ROOT}/valgrind/randballs.valgrind.supp
+        --gen-suppressions=all
+        --log-file=$ENV{DEV_ROOT}/valgrind/logs/memcheck.log
+        $<TARGET_FILE:${target}>
+    DEPENDS ${target}
+    WORKING_DIRECTORY $<TARGET_FILE_DIR:${target}>
+    COMMENT "Running randballs with valgrind"
+)
