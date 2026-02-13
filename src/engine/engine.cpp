@@ -8,7 +8,9 @@
 
 Engine::Engine() : sceneMng(this)
 {
-	window.create(sf::VideoMode({800, 600}), "randballs");
+	// window.create(sf::VideoMode({800, 600}), "randballs");
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	window.create(sf::VideoMode({800, 600}, desktop.bitsPerPixel), "randballs");
 }
 
 
