@@ -18,13 +18,17 @@ void Scene::setEngine(Engine *engine)
 	textureMng = &engine->getTextureManager();
 }
 
-void Scene::handleDefaultEvents(sf::Event *event)
+void Scene::handleDefaultEvents(const sf::Event& event)
 {
-	if (event->type == sf::Event::Closed ||
-		event->type == sf::Event::KeyPressed && event->key.code == sf::Keyboard::Escape)
+	if (event.is<sf::Event::Closed>())
 		engine->stop();
-	else if (event->type == sf::Event::Resized)
-		engine->getWindow().setView(sf::View(sf::FloatRect(0, 0, event->size.width, event->size.height)));
+	else if (const auto* keyPressed = event.getIf<sf::Event::KeyPressed>())
+	{
+		if (keyPressed->code == sf::Keyboard::Key::Escape)
+			engine->stop();
+	}
+	else if (const auto* resized = event.getIf<sf::Event::Resized>())
+		engine->getWindow().setView(sf::View(sf::FloatRect({0, 0}, sf::Vector2f(resized->size))));
 
 	// todo handle here resizing window and black border bars for resolution
 }

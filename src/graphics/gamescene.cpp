@@ -16,12 +16,12 @@
 #include "engine/utils.hpp"
 
 
-GameScene::GameScene() : Scene("game")
+GameScene::GameScene() : Scene("game"), instructions(font)
 {
-	font.loadFromFile("media/DejaVuSans.ttf");
+	[[maybe_unused]] auto result = font.openFromFile("media/DejaVuSans.ttf");
 
 	instructions.setFont(font);
-	instructions.setScale(0.5, 0.5);
+	instructions.setScale(sf::Vector2f(0.5f, 0.5f));
 
 	sf::String str = "[T] Toggle text\n";
 	str += "[Left Mouse] Press and direct to spawn balls\n";
@@ -60,37 +60,47 @@ sf::Vector2f GameScene::getMousePosition()
 
 void GameScene::update()
 {
-	sf::Event event;
-	while (window->pollEvent(event))
+	while (auto event = window->pollEvent())
 	{
-		handleDefaultEvents(&event);
+		handleDefaultEvents(*event);
 
-		if (event.type == sf::Event::MouseButtonPressed)
+		if (const auto* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
 		{
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (mouseButtonPressed->button == sf::Mouse::Button::Left)
 			{
 				directional_spawn = true;
 				click_position = getMousePosition();
 			}
-			else if (event.mouseButton.button == sf::Mouse::Right)
-				em.getEventDispatcher()->trigger<GameEvent::FreeArea>(getMousePosition(), true);
-			else if (event.mouseButton.button == sf::Mouse::Middle)
+			else if (mouseButtonPressed->button == sf::Mouse::Button::Right)
+				em.getEventDispatcher()->trigger(GameEvent::FreeArea(getMousePosition(), true));
+			else if (mouseButtonPressed->button == sf::Mouse::Button::Middle)
 				em.getEventDispatcher()->trigger<GameEvent::SpawnPortal>(getMousePosition());
-
 		}
-		else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+		else if (const auto* mouseButtonReleased = event->getIf<sf::Event::MouseButtonReleased>())
 		{
-			directional_spawn = false;
+			if (mouseButtonReleased->button == sf::Mouse::Button::Left)
+				directional_spawn = false;
 		}
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A)
-			for (int i = 0; i < 500; i++)
-				em.getEventDispatcher()->trigger<GameEvent::SpawnBall>();
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
-			em.getEventDispatcher()->trigger<GameEvent::FreeArea>(getMousePosition(), false);
-		else if (event.key.code == sf::Keyboard::Q)
-			em.getEventDispatcher()->trigger<GameEvent::EscapeFromArea>(getMousePosition(), event.type == sf::Event::KeyPressed);
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::T)
-			show_text = !show_text;
+		else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+		{
+			if (keyPressed->code == sf::Keyboard::Key::A)
+				for (int i = 0; i < 500; i++)
+					em.getEventDispatcher()->trigger<GameEvent::SpawnBall>();
+			else if (keyPressed->code == sf::Keyboard::Key::Space)
+				em.getEventDispatcher()->trigger(GameEvent::FreeArea(getMousePosition(), false));
+			else if (keyPressed->code == sf::Keyboard::Key::T)
+				show_text = !show_text;
+		}
+		else if (const auto* keyEvent = event->getIf<sf::Event::KeyPressed>())
+		{
+			if (keyEvent->code == sf::Keyboard::Key::Q)
+				em.getEventDispatcher()->trigger(GameEvent::EscapeFromArea(getMousePosition(), true));
+		}
+		else if (const auto* keyEvent = event->getIf<sf::Event::KeyReleased>())
+		{
+			if (keyEvent->code == sf::Keyboard::Key::Q)
+				em.getEventDispatcher()->trigger(GameEvent::EscapeFromArea(getMousePosition(), false));
+		}
 	}
 }
 
@@ -103,7 +113,7 @@ void GameScene::fixedupdate(const float dt)
 		if (mouse != click_position)
 		{
 			directional_spawn_acc = 0.f;
-			em.getEventDispatcher()->trigger<GameEvent::SpawnBall>(click_position, utils::normalize(click_position - mouse));
+			em.getEventDispatcher()->trigger(GameEvent::SpawnBall(click_position, utils::normalize(click_position - mouse)));
 		}
 	}
 

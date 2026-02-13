@@ -13,7 +13,7 @@ protected:
 	class TextureManager* textureMng;
 	class sf::RenderWindow* window;
 
-	void handleDefaultEvents(class sf::Event*);
+	void handleDefaultEvents(const class sf::Event& event);
 public:
 	Scene(const std::string& name);
 	~Scene();
