@@ -21,6 +21,8 @@ void Teleportsystem::onInit()
 
 void Teleportsystem::receive(const GameEvent::Teleport &event)
 {
+// FIXME
+#if 0
 	if (!registry->has<Teleportable>(event.who))
 		return;
 
@@ -37,4 +39,5 @@ void Teleportsystem::receive(const GameEvent::Teleport &event)
 		body.position = registry->get<Body>(destination_portal).position;
 		renderable.current_position = renderable.last_position = body.position;
 	}
+#endif
 }
