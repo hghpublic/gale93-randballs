@@ -11,7 +11,7 @@ BaseSystem::~BaseSystem()
 {
 }
 
-void BaseSystem::init(Engine * e, entt::DefaultRegistry& r, entt::Dispatcher& d)
+void BaseSystem::init(Engine * e, entt::registry& r, entt::dispatcher& d)
 {
 	 registry = &r;
 	 eventDispatcher = &d;

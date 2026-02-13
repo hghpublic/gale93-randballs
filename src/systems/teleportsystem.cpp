@@ -16,7 +16,7 @@ Teleportsystem::Teleportsystem()
 
 void Teleportsystem::onInit()
 {
-	eventDispatcher->sink<GameEvent::Teleport>().connect(this);
+	eventDispatcher->sink<GameEvent::Teleport>().connect<&Teleportsystem::receive>(this);
 }
 
 void Teleportsystem::receive(const GameEvent::Teleport &event)
