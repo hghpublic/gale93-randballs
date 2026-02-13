@@ -20,10 +20,11 @@ UserSystem::UserSystem()
 
 void UserSystem::onInit()
 {
-	eventDispatcher->sink<GameEvent::SpawnBall>().connect(this);
-	eventDispatcher->sink<GameEvent::SpawnPortal>().connect(this);
-	eventDispatcher->sink<GameEvent::FreeArea>().connect(this);
-	eventDispatcher->sink<GameEvent::EscapeFromArea>().connect(this);
+    // TODO: this is really bad, find a better way to connect events to member functions
+	eventDispatcher->sink<GameEvent::SpawnBall>().connect<static_cast<void (UserSystem::*)(const GameEvent::SpawnBall&)>(&UserSystem::receive)>(this);
+	eventDispatcher->sink<GameEvent::SpawnPortal>().connect<static_cast<void (UserSystem::*)(const GameEvent::SpawnPortal&)>(&UserSystem::receive)>(this);
+	eventDispatcher->sink<GameEvent::FreeArea>().connect<static_cast<void (UserSystem::*)(const GameEvent::FreeArea&)>(&UserSystem::receive)>(this);
+	eventDispatcher->sink<GameEvent::EscapeFromArea>().connect<static_cast<void (UserSystem::*)(const GameEvent::EscapeFromArea&)>(&UserSystem::receive)>(this);
 }
 
 
