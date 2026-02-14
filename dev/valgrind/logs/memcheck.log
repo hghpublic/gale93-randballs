@@ -1,0 +1,1786 @@
+==27971== Memcheck, a memory error detector
+==27971== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==27971== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==27971== Command: /workspaces/gale93-randballs/build/randballs
+==27971== Parent PID: 27970
+==27971== 
+==27971== Mismatched new/delete size value: 72
+==27971==    at 0x4888F60: operator delete(void*, unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x120423: std::default_delete<Scene>::operator()(Scene*) const (unique_ptr.h:93)
+==27971==    by 0x11FFAF: std::unique_ptr<Scene, std::default_delete<Scene> >::~unique_ptr() (unique_ptr.h:398)
+==27971==    by 0x134A37: void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> > >(std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:151)
+==27971==    by 0x1346E3: void std::_Destroy_aux<false>::__destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:163)
+==27971==    by 0x134343: void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:196)
+==27971==    by 0x133ED3: _Destroy<std::unique_ptr<Scene>*, std::unique_ptr<Scene> > (alloc_traits.h:944)
+==27971==    by 0x133ED3: std::vector<std::unique_ptr<Scene, std::default_delete<Scene> >, std::allocator<std::unique_ptr<Scene, std::default_delete<Scene> > > >::~vector() (stl_vector.h:735)
+==27971==    by 0x133A3B: SceneManager::~SceneManager() (scenemanager.cpp:13)
+==27971==    by 0x11F2CB: Engine::~Engine() (engine.cpp:19)
+==27971==    by 0x11F07B: main (main.cpp:13)
+==27971==  Address 0x28d1b350 is 0 bytes inside a block of size 1,056 alloc'd
+==27971==    at 0x48859FC: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x11FCC7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:SizeMismatch
+   fun:_ZdlPvm
+   fun:_ZNKSt14default_deleteI5SceneEclEPS0_
+   fun:_ZNSt10unique_ptrI5SceneSt14default_deleteIS0_EED1Ev
+   fun:_ZSt8_DestroyISt10unique_ptrI5SceneSt14default_deleteIS1_EEEvPT_
+   fun:_ZNSt12_Destroy_auxILb0EE9__destroyIPSt10unique_ptrI5SceneSt14default_deleteIS3_EEEEvT_S8_
+   fun:_ZSt8_DestroyIPSt10unique_ptrI5SceneSt14default_deleteIS1_EEEvT_S6_
+   fun:_Destroy<std::unique_ptr<Scene>*, std::unique_ptr<Scene> >
+   fun:_ZNSt6vectorISt10unique_ptrI5SceneSt14default_deleteIS1_EESaIS4_EED1Ev
+   fun:_ZN12SceneManagerD1Ev
+   fun:_ZN6EngineD1Ev
+   fun:main
+}
+==27971== 
+==27971== HEAP SUMMARY:
+==27971==     in use at exit: 31,012,978 bytes in 28,226 blocks
+==27971==   total heap usage: 222,163 allocs, 193,937 frees, 231,089,425 bytes allocated
+==27971== 
+==27971== 5 bytes in 1 blocks are indirectly lost in loss record 13 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x27494F: tt_name_ascii_from_utf16 (sfobjs.c:72)
+==27971==    by 0x274FAB: tt_face_get_name (sfobjs.c:284)
+==27971==    by 0x276527: sfnt_load_face (sfobjs.c:1069)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_name_ascii_from_utf16
+   fun:tt_face_get_name
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 5 bytes in 1 blocks are indirectly lost in loss record 14 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2217CB: ft_mem_dup (ftutil.c:184)
+==27971==    by 0x221893: ft_mem_strdup (ftutil.c:204)
+==27971==    by 0x27659F: sfnt_load_face (sfobjs.c:1079)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_dup
+   fun:ft_mem_strdup
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 8 bytes in 1 blocks are still reachable in loss record 22 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x50538C7: ??? (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x5055D63: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971==    by 0x356E9F: void std::_Optional_base_impl<sf::priv::GlxContext, std::_Optional_base<sf::priv::GlxContext, false, false> >::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:455)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt19_Optional_base_implIN2sf4priv10GlxContextESt14_Optional_baseIS2_Lb0ELb0EEE12_M_constructIJDnEEEvDpOT_
+}
+==27971== 8 bytes in 1 blocks are still reachable in loss record 33 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x49224D3: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x49238AF: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x492AD47: XIQueryVersion (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x37E653: (anonymous namespace)::WindowImplX11Impl::initRawMouse(_XDisplay*) (WindowImplX11.cpp:384)
+==27971==    by 0x3827FB: sf::priv::WindowImplX11::initialize() (WindowImplX11.cpp:1590)
+==27971==    by 0x37F1DB: sf::priv::WindowImplX11::WindowImplX11(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImplX11.cpp:669)
+==27971==    by 0x3628EF: std::__detail::_MakeUniq<sf::priv::WindowImplX11>::__single_object std::make_unique<sf::priv::WindowImplX11, sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&>(sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&) (unique_ptr.h:1076)
+==27971==    by 0x3616A7: sf::priv::WindowImpl::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImpl.cpp:154)
+==27971==    by 0x35ED83: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (Window.cpp:91)
+==27971==    by 0x35ECCB: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State) (Window.cpp:80)
+==27971==    by 0x11F1DB: Engine::Engine() (engine.cpp:13)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   fun:XIQueryVersion
+   fun:_ZN12_GLOBAL__N_117WindowImplX11Impl12initRawMouseEP9_XDisplay
+   fun:_ZN2sf4priv13WindowImplX1110initializeEv
+   fun:_ZN2sf4priv13WindowImplX11C1ENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZSt11make_uniqueIN2sf4priv13WindowImplX11EJRNS0_9VideoModeERKNS0_6StringERjRNS0_5StateERKNS0_15ContextSettingsEEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN2sf4priv10WindowImpl6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateE
+   fun:_ZN6EngineC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 37 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x29534F: gray_raster_new (ftgrays.c:2085)
+==27971==    by 0x219863: ft_add_renderer (ftobjs.c:4622)
+==27971==    by 0x21A16B: FT_Add_Module (ftobjs.c:5143)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:gray_raster_new
+   fun:ft_add_renderer
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 38 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x26B08B: ft_black_new (ftraster.c:2620)
+==27971==    by 0x219863: ft_add_renderer (ftobjs.c:4622)
+==27971==    by 0x21A16B: FT_Add_Module (ftobjs.c:5143)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:ft_black_new
+   fun:ft_add_renderer
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 39 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x271ABB: sdf_raster_new (ftsdf.c:3776)
+==27971==    by 0x219863: ft_add_renderer (ftobjs.c:4622)
+==27971==    by 0x21A16B: FT_Add_Module (ftobjs.c:5143)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:sdf_raster_new
+   fun:ft_add_renderer
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 40 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x26DAD7: bsdf_raster_new (ftbsdf.c:1186)
+==27971==    by 0x219863: ft_add_renderer (ftobjs.c:4622)
+==27971==    by 0x21A16B: FT_Add_Module (ftobjs.c:5143)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:bsdf_raster_new
+   fun:ft_add_renderer
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 41 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x27542B: sfnt_open_font (sfobjs.c:484)
+==27971==    by 0x275647: sfnt_init_face (sfobjs.c:562)
+==27971==    by 0x2B0523: tt_face_init (ttobjs.c:693)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:sfnt_open_font
+   fun:sfnt_init_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 42 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x28E6E7: tt_face_load_gasp (ttload.c:1469)
+==27971==    by 0x2762E3: sfnt_load_face (sfobjs.c:1030)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_load_gasp
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 43 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x274F03: tt_face_get_name (sfobjs.c:273)
+==27971==    by 0x276527: sfnt_load_face (sfobjs.c:1069)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_get_name
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 8 bytes in 1 blocks are indirectly lost in loss record 44 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x221537: ft_mem_realloc (ftutil.c:101)
+==27971==    by 0x21115B: FT_GlyphLoader_CheckPoints (ftgloadr.c:286)
+==27971==    by 0x297C43: TT_Load_Simple_Glyph (ttgload.c:361)
+==27971==    by 0x29A3C3: load_truetype_glyph (ttgload.c:1654)
+==27971==    by 0x29BFCF: TT_Load_Glyph (ttgload.c:2650)
+==27971==    by 0x29734B: tt_glyph_load (ttdriver.c:502)
+==27971==    by 0x213A0F: FT_Load_Glyph (ftobjs.c:1069)
+==27971==    by 0x2CA2F7: af_latin_metrics_init_widths (aflatin.c:155)
+==27971==    by 0x2CBD57: af_latin_metrics_init (aflatin.c:1148)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:ft_mem_realloc
+   fun:FT_GlyphLoader_CheckPoints
+   fun:TT_Load_Simple_Glyph
+   fun:load_truetype_glyph
+   fun:TT_Load_Glyph
+   fun:tt_glyph_load
+   fun:FT_Load_Glyph
+   fun:af_latin_metrics_init_widths
+   fun:af_latin_metrics_init
+}
+==27971== 12 bytes in 1 blocks are indirectly lost in loss record 60 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x27494F: tt_name_ascii_from_utf16 (sfobjs.c:72)
+==27971==    by 0x274FAB: tt_face_get_name (sfobjs.c:284)
+==27971==    by 0x276483: sfnt_load_face (sfobjs.c:1063)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_name_ascii_from_utf16
+   fun:tt_face_get_name
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 22 bytes in 1 blocks are indirectly lost in loss record 118 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x274F03: tt_face_get_name (sfobjs.c:273)
+==27971==    by 0x276483: sfnt_load_face (sfobjs.c:1063)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_get_name
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 24 bytes in 1 blocks are still reachable in loss record 136 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055243: XextCreateExtension (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x50557D7: ??? (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x5055D4F: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextCreateExtension
+   obj:/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+}
+==27971== 24 bytes in 1 blocks are still reachable in loss record 138 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055D73: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971==    by 0x356E9F: void std::_Optional_base_impl<sf::priv::GlxContext, std::_Optional_base<sf::priv::GlxContext, false, false> >::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:455)
+==27971==    by 0x35567F: std::enable_if<is_constructible_v<sf::priv::GlxContext, decltype(nullptr)>, sf::priv::GlxContext&>::type std::optional<sf::priv::GlxContext>::emplace<decltype(nullptr)>(decltype(nullptr)&&) (optional:916)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt19_Optional_base_implIN2sf4priv10GlxContextESt14_Optional_baseIS2_Lb0ELb0EEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt8optionalIN2sf4priv10GlxContextEE7emplaceIJDnEEENSt9enable_ifIX18is_constructible_vIS2_JDpT_EEERS2_E4typeEDpOS6_
+}
+==27971== 24 bytes in 1 blocks are still reachable in loss record 154 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055243: XextCreateExtension (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x49225B7: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x492AD1F: XIQueryVersion (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x37E653: (anonymous namespace)::WindowImplX11Impl::initRawMouse(_XDisplay*) (WindowImplX11.cpp:384)
+==27971==    by 0x3827FB: sf::priv::WindowImplX11::initialize() (WindowImplX11.cpp:1590)
+==27971==    by 0x37F1DB: sf::priv::WindowImplX11::WindowImplX11(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImplX11.cpp:669)
+==27971==    by 0x3628EF: std::__detail::_MakeUniq<sf::priv::WindowImplX11>::__single_object std::make_unique<sf::priv::WindowImplX11, sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&>(sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&) (unique_ptr.h:1076)
+==27971==    by 0x3616A7: sf::priv::WindowImpl::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImpl.cpp:154)
+==27971==    by 0x35ED83: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (Window.cpp:91)
+==27971==    by 0x35ECCB: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State) (Window.cpp:80)
+==27971==    by 0x11F1DB: Engine::Engine() (engine.cpp:13)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextCreateExtension
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   fun:XIQueryVersion
+   fun:_ZN12_GLOBAL__N_117WindowImplX11Impl12initRawMouseEP9_XDisplay
+   fun:_ZN2sf4priv13WindowImplX1110initializeEv
+   fun:_ZN2sf4priv13WindowImplX11C1ENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZSt11make_uniqueIN2sf4priv13WindowImplX11EJRNS0_9VideoModeERKNS0_6StringERjRNS0_5StateERKNS0_15ContextSettingsEEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN2sf4priv10WindowImpl6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateE
+   fun:_ZN6EngineC1Ev
+}
+==27971== 24 bytes in 1 blocks are still reachable in loss record 155 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055D73: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x492267B: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x492AD1F: XIQueryVersion (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x37E653: (anonymous namespace)::WindowImplX11Impl::initRawMouse(_XDisplay*) (WindowImplX11.cpp:384)
+==27971==    by 0x3827FB: sf::priv::WindowImplX11::initialize() (WindowImplX11.cpp:1590)
+==27971==    by 0x37F1DB: sf::priv::WindowImplX11::WindowImplX11(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImplX11.cpp:669)
+==27971==    by 0x3628EF: std::__detail::_MakeUniq<sf::priv::WindowImplX11>::__single_object std::make_unique<sf::priv::WindowImplX11, sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&>(sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&) (unique_ptr.h:1076)
+==27971==    by 0x3616A7: sf::priv::WindowImpl::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImpl.cpp:154)
+==27971==    by 0x35ED83: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (Window.cpp:91)
+==27971==    by 0x35ECCB: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State) (Window.cpp:80)
+==27971==    by 0x11F1DB: Engine::Engine() (engine.cpp:13)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   fun:XIQueryVersion
+   fun:_ZN12_GLOBAL__N_117WindowImplX11Impl12initRawMouseEP9_XDisplay
+   fun:_ZN2sf4priv13WindowImplX1110initializeEv
+   fun:_ZN2sf4priv13WindowImplX11C1ENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZSt11make_uniqueIN2sf4priv13WindowImplX11EJRNS0_9VideoModeERKNS0_6StringERjRNS0_5StateERKNS0_15ContextSettingsEEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN2sf4priv10WindowImpl6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateE
+   fun:_ZN6EngineC1Ev
+}
+==27971== 24 bytes in 1 blocks are indirectly lost in loss record 159 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x216433: ft_open_face_internal (ftobjs.c:2730)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 24 bytes in 1 blocks are indirectly lost in loss record 160 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x216B1B: FT_New_Size (ftobjs.c:3015)
+==27971==    by 0x216497: ft_open_face_internal (ftobjs.c:2754)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_New_Size
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 32 bytes in 1 blocks are still reachable in loss record 490 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055B7B: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971==    by 0x356E9F: void std::_Optional_base_impl<sf::priv::GlxContext, std::_Optional_base<sf::priv::GlxContext, false, false> >::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:455)
+==27971==    by 0x35567F: std::enable_if<is_constructible_v<sf::priv::GlxContext, decltype(nullptr)>, sf::priv::GlxContext&>::type std::optional<sf::priv::GlxContext>::emplace<decltype(nullptr)>(decltype(nullptr)&&) (optional:916)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt19_Optional_base_implIN2sf4priv10GlxContextESt14_Optional_baseIS2_Lb0ELb0EEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt8optionalIN2sf4priv10GlxContextEE7emplaceIJDnEEENSt9enable_ifIX18is_constructible_vIS2_JDpT_EEERS2_E4typeEDpOS6_
+}
+==27971== 32 bytes in 1 blocks are still reachable in loss record 491 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055B7B: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x5055817: ??? (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x5055D4F: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+}
+==27971== 32 bytes in 1 blocks are still reachable in loss record 492 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x48C1E7B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971==    by 0x356E9F: void std::_Optional_base_impl<sf::priv::GlxContext, std::_Optional_base<sf::priv::GlxContext, false, false> >::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:455)
+==27971==    by 0x35567F: std::enable_if<is_constructible_v<sf::priv::GlxContext, decltype(nullptr)>, sf::priv::GlxContext&>::type std::optional<sf::priv::GlxContext>::emplace<decltype(nullptr)>(decltype(nullptr)&&) (optional:916)
+==27971==    by 0x3547EF: sf::priv::GlContext::SharedContext::SharedContext() (GlContext.cpp:208)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt19_Optional_base_implIN2sf4priv10GlxContextESt14_Optional_baseIS2_Lb0ELb0EEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt8optionalIN2sf4priv10GlxContextEE7emplaceIJDnEEENSt9enable_ifIX18is_constructible_vIS2_JDpT_EEERS2_E4typeEDpOS6_
+   fun:_ZN2sf4priv9GlContext13SharedContextC1Ev
+}
+==27971== 32 bytes in 1 blocks are still reachable in loss record 508 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5055B7B: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x492267B: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x492AD1F: XIQueryVersion (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x37E653: (anonymous namespace)::WindowImplX11Impl::initRawMouse(_XDisplay*) (WindowImplX11.cpp:384)
+==27971==    by 0x3827FB: sf::priv::WindowImplX11::initialize() (WindowImplX11.cpp:1590)
+==27971==    by 0x37F1DB: sf::priv::WindowImplX11::WindowImplX11(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImplX11.cpp:669)
+==27971==    by 0x3628EF: std::__detail::_MakeUniq<sf::priv::WindowImplX11>::__single_object std::make_unique<sf::priv::WindowImplX11, sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&>(sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&) (unique_ptr.h:1076)
+==27971==    by 0x3616A7: sf::priv::WindowImpl::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImpl.cpp:154)
+==27971==    by 0x35ED83: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (Window.cpp:91)
+==27971==    by 0x35ECCB: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State) (Window.cpp:80)
+==27971==    by 0x11F1DB: Engine::Engine() (engine.cpp:13)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   fun:XIQueryVersion
+   fun:_ZN12_GLOBAL__N_117WindowImplX11Impl12initRawMouseEP9_XDisplay
+   fun:_ZN2sf4priv13WindowImplX1110initializeEv
+   fun:_ZN2sf4priv13WindowImplX11C1ENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZSt11make_uniqueIN2sf4priv13WindowImplX11EJRNS0_9VideoModeERKNS0_6StringERjRNS0_5StateERKNS0_15ContextSettingsEEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN2sf4priv10WindowImpl6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateE
+   fun:_ZN6EngineC1Ev
+}
+==27971== 32 bytes in 1 blocks are indirectly lost in loss record 516 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C2B37: FT_New_Memory (ftsystem.c:408)
+==27971==    by 0x225E4B: FT_Init_FreeType (ftinit.c:214)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:FT_New_Memory
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 40 bytes in 1 blocks are indirectly lost in loss record 1,457 of 3,843
+==27971==    at 0x488C2D8: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C27CF: ft_realloc (ftsystem.c:150)
+==27971==    by 0x22170B: ft_mem_qrealloc (ftutil.c:156)
+==27971==    by 0x2185A7: FT_CMap_New (ftobjs.c:3912)
+==27971==    by 0x28585F: tt_face_build_cmaps (ttcmap.c:3858)
+==27971==    by 0x2767EB: sfnt_load_face (sfobjs.c:1188)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:ft_realloc
+   fun:ft_mem_qrealloc
+   fun:FT_CMap_New
+   fun:tt_face_build_cmaps
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 48 bytes in 1 blocks are indirectly lost in loss record 2,339 of 3,843
+==27971==    at 0x488C2D8: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C27CF: ft_realloc (ftsystem.c:150)
+==27971==    by 0x22170B: ft_mem_qrealloc (ftutil.c:156)
+==27971==    by 0x221537: ft_mem_realloc (ftutil.c:101)
+==27971==    by 0x210F77: FT_GlyphLoader_CheckPoints (ftgloadr.c:243)
+==27971==    by 0x297DA3: TT_Load_Simple_Glyph (ttgload.c:389)
+==27971==    by 0x29A3C3: load_truetype_glyph (ttgload.c:1654)
+==27971==    by 0x29BFCF: TT_Load_Glyph (ttgload.c:2650)
+==27971==    by 0x29734B: tt_glyph_load (ttdriver.c:502)
+==27971==    by 0x213A0F: FT_Load_Glyph (ftobjs.c:1069)
+==27971==    by 0x2CAA07: af_latin_metrics_init_blues (aflatin.c:481)
+==27971==    by 0x2CBD63: af_latin_metrics_init (aflatin.c:1149)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:ft_realloc
+   fun:ft_mem_qrealloc
+   fun:ft_mem_realloc
+   fun:FT_GlyphLoader_CheckPoints
+   fun:TT_Load_Simple_Glyph
+   fun:load_truetype_glyph
+   fun:TT_Load_Glyph
+   fun:tt_glyph_load
+   fun:FT_Load_Glyph
+   fun:af_latin_metrics_init_blues
+   fun:af_latin_metrics_init
+}
+==27971== 72 bytes in 1 blocks are indirectly lost in loss record 2,869 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x216B4B: FT_New_Size (ftobjs.c:3020)
+==27971==    by 0x216497: ft_open_face_internal (ftobjs.c:2754)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_New_Size
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 80 bytes in 1 blocks are indirectly lost in loss record 2,887 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x21243F: ft_glyphslot_init (ftobjs.c:322)
+==27971==    by 0x212FDF: FT_New_GlyphSlot (ftobjs.c:702)
+==27971==    by 0x21647B: ft_open_face_internal (ftobjs.c:2743)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:ft_glyphslot_init
+   fun:FT_New_GlyphSlot
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+}
+==27971== 120 bytes in 5 blocks are indirectly lost in loss record 2,941 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2197DF: ft_add_renderer (ftobjs.c:4608)
+==27971==    by 0x21A16B: FT_Add_Module (ftobjs.c:5143)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_add_renderer
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 128 bytes in 1 blocks are indirectly lost in loss record 3,059 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x2143EF: open_face (ftobjs.c:1540)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 171 bytes in 1 blocks are indirectly lost in loss record 3,085 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x21F447: FT_Stream_EnterFrame (ftstream.c:275)
+==27971==    by 0x21F323: FT_Stream_ExtractFrame (ftstream.c:203)
+==27971==    by 0x2B2157: tt_face_load_fpgm (ttpload.c:419)
+==27971==    by 0x2B06F3: tt_face_init (ttobjs.c:758)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_Stream_EnterFrame
+   fun:FT_Stream_ExtractFrame
+   fun:tt_face_load_fpgm
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 176 bytes in 1 blocks are indirectly lost in loss record 3,102 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x21092B: FT_GlyphLoader_New (ftgloadr.c:76)
+==27971==    by 0x212483: ft_glyphslot_init (ftobjs.c:328)
+==27971==    by 0x212FDF: FT_New_GlyphSlot (ftobjs.c:702)
+==27971==    by 0x21647B: ft_open_face_internal (ftobjs.c:2743)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_GlyphLoader_New
+   fun:ft_glyphslot_init
+   fun:FT_New_GlyphSlot
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 200 bytes in 1 blocks are still reachable in loss record 3,122 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x492388F: ??? (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x492AD47: XIQueryVersion (in /usr/lib/aarch64-linux-gnu/libXi.so.6.1.0)
+==27971==    by 0x37E653: (anonymous namespace)::WindowImplX11Impl::initRawMouse(_XDisplay*) (WindowImplX11.cpp:384)
+==27971==    by 0x3827FB: sf::priv::WindowImplX11::initialize() (WindowImplX11.cpp:1590)
+==27971==    by 0x37F1DB: sf::priv::WindowImplX11::WindowImplX11(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImplX11.cpp:669)
+==27971==    by 0x3628EF: std::__detail::_MakeUniq<sf::priv::WindowImplX11>::__single_object std::make_unique<sf::priv::WindowImplX11, sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&>(sf::VideoMode&, sf::String const&, unsigned int&, sf::State&, sf::ContextSettings const&) (unique_ptr.h:1076)
+==27971==    by 0x3616A7: sf::priv::WindowImpl::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (WindowImpl.cpp:154)
+==27971==    by 0x35ED83: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State, sf::ContextSettings const&) (Window.cpp:91)
+==27971==    by 0x35ECCB: sf::Window::create(sf::VideoMode, sf::String const&, unsigned int, sf::State) (Window.cpp:80)
+==27971==    by 0x11F1DB: Engine::Engine() (engine.cpp:13)
+==27971==    by 0x11F067: main (main.cpp:8)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/aarch64-linux-gnu/libXi.so.6.1.0
+   fun:XIQueryVersion
+   fun:_ZN12_GLOBAL__N_117WindowImplX11Impl12initRawMouseEP9_XDisplay
+   fun:_ZN2sf4priv13WindowImplX1110initializeEv
+   fun:_ZN2sf4priv13WindowImplX11C1ENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZSt11make_uniqueIN2sf4priv13WindowImplX11EJRNS0_9VideoModeERKNS0_6StringERjRNS0_5StateERKNS0_15ContextSettingsEEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN2sf4priv10WindowImpl6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateERKNS_15ContextSettingsE
+   fun:_ZN2sf6Window6createENS_9VideoModeERKNS_6StringEjNS_5StateE
+   fun:_ZN6EngineC1Ev
+   fun:main
+}
+==27971== 208 bytes in 1 blocks are still reachable in loss record 3,131 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x5053877: ??? (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x5055D63: XextAddDisplay (in /usr/lib/aarch64-linux-gnu/libXext.so.6.4.0)
+==27971==    by 0x48C1E5B: ??? (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x48C3ADF: XRRGetScreenInfo (in /usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0)
+==27971==    by 0x379D03: sf::priv::VideoModeImpl::getDesktopMode() (VideoModeImpl.cpp:148)
+==27971==    by 0x35C167: sf::VideoMode::getDesktopMode() (VideoMode.cpp:47)
+==27971==    by 0x38FEEF: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*, sf::ContextSettings const&, sf::Vector2<unsigned int>) (GlxContext.cpp:148)
+==27971==    by 0x38FC47: sf::priv::GlxContext::GlxContext(sf::priv::GlxContext*) (GlxContext.cpp:110)
+==27971==    by 0x359903: void std::_Construct<sf::priv::GlxContext, decltype(nullptr)>(sf::priv::GlxContext*, decltype(nullptr)&&) (stl_construct.h:119)
+==27971==    by 0x358947: void std::_Optional_payload_base<sf::priv::GlxContext>::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:274)
+==27971==    by 0x356E9F: void std::_Optional_base_impl<sf::priv::GlxContext, std::_Optional_base<sf::priv::GlxContext, false, false> >::_M_construct<decltype(nullptr)>(decltype(nullptr)&&) (optional:455)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/aarch64-linux-gnu/libXext.so.6.4.0
+   fun:XextAddDisplay
+   obj:/usr/lib/aarch64-linux-gnu/libXrandr.so.2.2.0
+   fun:XRRGetScreenInfo
+   fun:_ZN2sf4priv13VideoModeImpl14getDesktopModeEv
+   fun:_ZN2sf9VideoMode14getDesktopModeEv
+   fun:_ZN2sf4priv10GlxContextC1EPS1_RKNS_15ContextSettingsENS_7Vector2IjEE
+   fun:_ZN2sf4priv10GlxContextC1EPS1_
+   fun:_ZSt10_ConstructIN2sf4priv10GlxContextEJDnEEvPT_DpOT0_
+   fun:_ZNSt22_Optional_payload_baseIN2sf4priv10GlxContextEE12_M_constructIJDnEEEvDpOT_
+   fun:_ZNSt19_Optional_base_implIN2sf4priv10GlxContextESt14_Optional_baseIS2_Lb0ELb0EEE12_M_constructIJDnEEEvDpOT_
+}
+==27971== 216 bytes in 1 blocks are indirectly lost in loss record 3,144 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x2278E3: FT_Stroker_New (ftstroke.c:806)
+==27971==    by 0x1866BB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:436)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_Stroker_New
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 304 bytes in 1 blocks are indirectly lost in loss record 3,215 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x212FBB: FT_New_GlyphSlot (ftobjs.c:698)
+==27971==    by 0x21647B: ft_open_face_internal (ftobjs.c:2743)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_New_GlyphSlot
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 360 bytes in 5 blocks are indirectly lost in loss record 3,246 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x218503: FT_CMap_New (ftobjs.c:3899)
+==27971==    by 0x28585F: tt_face_build_cmaps (ttcmap.c:3858)
+==27971==    by 0x2767EB: sfnt_load_face (sfobjs.c:1188)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_CMap_New
+   fun:tt_face_build_cmaps
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+}
+==27971== 400 bytes in 1 blocks are indirectly lost in loss record 3,264 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x21A997: FT_New_Library (ftobjs.c:5513)
+==27971==    by 0x225E6F: FT_Init_FreeType (ftinit.c:224)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_New_Library
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 472 bytes in 1 blocks are still reachable in loss record 3,309 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x4EFFC87: __fopen_internal (iofopen.c:65)
+==27971==    by 0x3A4253: sf::openFile(std::filesystem::__cxx11::path const&, std::basic_string_view<char, std::char_traits<char> >) (Utils.cpp:60)
+==27971==    by 0x3A67EB: sf::FileInputStream::open(std::filesystem::__cxx11::path const&) (FileInputStream.cpp:84)
+==27971==    by 0x185877: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:166)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__fopen_internal
+   fun:_ZN2sf8openFileERKNSt10filesystem7__cxx114pathESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf15FileInputStream4openERKNSt10filesystem7__cxx114pathE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+   fun:main
+}
+==27971== 552 bytes in 1 blocks are indirectly lost in loss record 3,333 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x216AF7: FT_New_Size (ftobjs.c:3015)
+==27971==    by 0x216497: ft_open_face_internal (ftobjs.c:2754)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_New_Size
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 608 bytes in 1 blocks are indirectly lost in loss record 3,349 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x28D537: tt_face_load_font_dir (ttload.c:411)
+==27971==    by 0x27571F: sfnt_init_face (sfobjs.c:594)
+==27971==    by 0x2B0523: tt_face_init (ttobjs.c:693)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_load_font_dir
+   fun:sfnt_init_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 768 bytes in 1 blocks are indirectly lost in loss record 3,382 of 3,843
+==27971==    at 0x488C2D8: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C27CF: ft_realloc (ftsystem.c:150)
+==27971==    by 0x22170B: ft_mem_qrealloc (ftutil.c:156)
+==27971==    by 0x221537: ft_mem_realloc (ftutil.c:101)
+==27971==    by 0x210F2F: FT_GlyphLoader_CheckPoints (ftgloadr.c:242)
+==27971==    by 0x297DA3: TT_Load_Simple_Glyph (ttgload.c:389)
+==27971==    by 0x29A3C3: load_truetype_glyph (ttgload.c:1654)
+==27971==    by 0x29BFCF: TT_Load_Glyph (ttgload.c:2650)
+==27971==    by 0x29734B: tt_glyph_load (ttdriver.c:502)
+==27971==    by 0x213A0F: FT_Load_Glyph (ftobjs.c:1069)
+==27971==    by 0x2CAA07: af_latin_metrics_init_blues (aflatin.c:481)
+==27971==    by 0x2CBD63: af_latin_metrics_init (aflatin.c:1149)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:ft_realloc
+   fun:ft_mem_qrealloc
+   fun:ft_mem_realloc
+   fun:FT_GlyphLoader_CheckPoints
+   fun:TT_Load_Simple_Glyph
+   fun:load_truetype_glyph
+   fun:TT_Load_Glyph
+   fun:tt_glyph_load
+   fun:FT_Load_Glyph
+   fun:af_latin_metrics_init_blues
+   fun:af_latin_metrics_init
+}
+==27971== 832 bytes in 1 blocks are indirectly lost in loss record 3,402 of 3,843
+==27971==    at 0x488C2D8: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C27CF: ft_realloc (ftsystem.c:150)
+==27971==    by 0x22170B: ft_mem_qrealloc (ftutil.c:156)
+==27971==    by 0x28E03F: tt_face_load_name (ttload.c:1014)
+==27971==    by 0x275FFF: sfnt_load_face (sfobjs.c:922)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:ft_realloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_load_name
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+}
+==27971== 1,020 bytes in 1 blocks are indirectly lost in loss record 3,407 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x2216B3: ft_mem_qrealloc (ftutil.c:145)
+==27971==    by 0x2B1FA7: tt_face_load_cvt (ttpload.c:338)
+==27971==    by 0x2B06C7: tt_face_init (ttobjs.c:754)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qrealloc
+   fun:tt_face_load_cvt
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+}
+==27971== 1,384 bytes in 1 blocks are indirectly lost in loss record 3,481 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x21F447: FT_Stream_EnterFrame (ftstream.c:275)
+==27971==    by 0x21F323: FT_Stream_ExtractFrame (ftstream.c:203)
+==27971==    by 0x2B2237: tt_face_load_prep (ttpload.c:482)
+==27971==    by 0x2B071F: tt_face_init (ttobjs.c:762)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_Stream_EnterFrame
+   fun:FT_Stream_ExtractFrame
+   fun:tt_face_load_prep
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 1,488 bytes in 1 blocks are indirectly lost in loss record 3,484 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x21437F: open_face (ftobjs.c:1529)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 1,536 bytes in 1 blocks are indirectly lost in loss record 3,491 of 3,843
+==27971==    at 0x488C2D8: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C27CF: ft_realloc (ftsystem.c:150)
+==27971==    by 0x22170B: ft_mem_qrealloc (ftutil.c:156)
+==27971==    by 0x221537: ft_mem_realloc (ftutil.c:101)
+==27971==    by 0x210FDF: FT_GlyphLoader_CheckPoints (ftgloadr.c:248)
+==27971==    by 0x297DA3: TT_Load_Simple_Glyph (ttgload.c:389)
+==27971==    by 0x29A3C3: load_truetype_glyph (ttgload.c:1654)
+==27971==    by 0x29BFCF: TT_Load_Glyph (ttgload.c:2650)
+==27971==    by 0x29734B: tt_glyph_load (ttdriver.c:502)
+==27971==    by 0x213A0F: FT_Load_Glyph (ftobjs.c:1069)
+==27971==    by 0x2CAA07: af_latin_metrics_init_blues (aflatin.c:481)
+==27971==    by 0x2CBD63: af_latin_metrics_init (aflatin.c:1149)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:ft_realloc
+   fun:ft_mem_qrealloc
+   fun:ft_mem_realloc
+   fun:FT_GlyphLoader_CheckPoints
+   fun:TT_Load_Simple_Glyph
+   fun:load_truetype_glyph
+   fun:TT_Load_Glyph
+   fun:tt_glyph_load
+   fun:FT_Load_Glyph
+   fun:af_latin_metrics_init_blues
+   fun:af_latin_metrics_init
+}
+==27971== 1,864 bytes in 19 blocks are indirectly lost in loss record 3,500 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x21A117: FT_Add_Module (ftobjs.c:5130)
+==27971==    by 0x225AF7: FT_Add_Default_Modules (ftinit.c:94)
+==27971==    by 0x225E97: FT_Init_FreeType (ftinit.c:228)
+==27971==    by 0x1864FB: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:406)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971==    by 0x120987: GameScene::GameScene() (gamescene.cpp:21)
+==27971==    by 0x11FCD7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:FT_Add_Module
+   fun:FT_Add_Default_Modules
+   fun:FT_Init_FreeType
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+   fun:_ZN9GameSceneC1Ev
+   fun:_ZSt11make_uniqueI9GameSceneJEENSt8__detail9_MakeUniqIT_E15__single_objectEDpOT0_
+   fun:_ZN6Engine5startEv
+}
+==27971== 1,872 bytes in 1 blocks are indirectly lost in loss record 3,502 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x2C7317: af_face_globals_get_metrics (afglobal.c:458)
+==27971==    by 0x2D03A3: af_loader_load_glyph (afloader.c:301)
+==27971==    by 0x2D1A7F: af_autofitter_load_glyph (afmodule.c:488)
+==27971==    by 0x2139D3: FT_Load_Glyph (ftobjs.c:1060)
+==27971==    by 0x213DDB: FT_Load_Char (ftobjs.c:1245)
+==27971==    by 0x186A2F: sf::Font::loadGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:489)
+==27971==    by 0x185D87: sf::Font::getGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:253)
+==27971==    by 0x185F63: sf::Font::getKerning(unsigned int, unsigned int, unsigned int, bool) const (Font.cpp:282)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:af_face_globals_get_metrics
+   fun:af_loader_load_glyph
+   fun:af_autofitter_load_glyph
+   fun:FT_Load_Glyph
+   fun:FT_Load_Char
+   fun:_ZNK2sf4Font9loadGlyphEDijbf
+   fun:_ZNK2sf4Font8getGlyphEDijbf
+   fun:_ZNK2sf4Font10getKerningEjjjb
+}
+==27971== 5,638 bytes in 1 blocks are indirectly lost in loss record 3,606 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x21F447: FT_Stream_EnterFrame (ftstream.c:275)
+==27971==    by 0x21F323: FT_Stream_ExtractFrame (ftstream.c:203)
+==27971==    by 0x28E2DF: tt_face_load_cmap (ttload.c:1115)
+==27971==    by 0x275FE7: sfnt_load_face (sfobjs.c:918)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_Stream_EnterFrame
+   fun:FT_Stream_ExtractFrame
+   fun:tt_face_load_cmap
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+}
+==27971== 13,000 bytes in 1 blocks are indirectly lost in loss record 3,676 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2C6FDF: af_face_globals_new (afglobal.c:339)
+==27971==    by 0x2CFEC3: af_loader_reset (afloader.c:55)
+==27971==    by 0x2D0377: af_loader_load_glyph (afloader.c:291)
+==27971==    by 0x2D1A7F: af_autofitter_load_glyph (afmodule.c:488)
+==27971==    by 0x2139D3: FT_Load_Glyph (ftobjs.c:1060)
+==27971==    by 0x213DDB: FT_Load_Char (ftobjs.c:1245)
+==27971==    by 0x186A2F: sf::Font::loadGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:489)
+==27971==    by 0x185D87: sf::Font::getGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:253)
+==27971==    by 0x1DF947: sf::Text::ensureGeometryUpdate() const (Text.cpp:385)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:af_face_globals_new
+   fun:af_loader_reset
+   fun:af_loader_load_glyph
+   fun:af_autofitter_load_glyph
+   fun:FT_Load_Glyph
+   fun:FT_Load_Char
+   fun:_ZNK2sf4Font9loadGlyphEDijbf
+   fun:_ZNK2sf4Font8getGlyphEDijbf
+   fun:_ZNK2sf4Text20ensureGeometryUpdateEv
+}
+==27971== 16,380 bytes in 1 blocks are indirectly lost in loss record 3,702 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x21F447: FT_Stream_EnterFrame (ftstream.c:275)
+==27971==    by 0x21F323: FT_Stream_ExtractFrame (ftstream.c:203)
+==27971==    by 0x28C643: tt_face_load_kern (ttkern.c:67)
+==27971==    by 0x2762FB: sfnt_load_face (sfobjs.c:1031)
+==27971==    by 0x2B05EF: tt_face_init (ttobjs.c:723)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_Stream_EnterFrame
+   fun:FT_Stream_ExtractFrame
+   fun:tt_face_load_kern
+   fun:sfnt_load_face
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+}
+==27971== 24,436 bytes in 1 blocks are indirectly lost in loss record 3,723 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x21F447: FT_Stream_EnterFrame (ftstream.c:275)
+==27971==    by 0x21F323: FT_Stream_ExtractFrame (ftstream.c:203)
+==27971==    by 0x2B1B4F: tt_face_load_loca (ttpload.c:172)
+==27971==    by 0x2B068B: tt_face_init (ttobjs.c:743)
+==27971==    by 0x2144DB: open_face (ftobjs.c:1562)
+==27971==    by 0x21626F: ft_open_face_internal (ftobjs.c:2654)
+==27971==    by 0x215FAF: FT_Open_Face (ftobjs.c:2527)
+==27971==    by 0x186627: sf::Font::openFromStreamImpl(sf::InputStream&, std::basic_string_view<char, std::char_traits<char> >) (Font.cpp:428)
+==27971==    by 0x185923: sf::Font::openFromFile(std::filesystem::__cxx11::path const&) (Font.cpp:174)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:FT_Stream_EnterFrame
+   fun:FT_Stream_ExtractFrame
+   fun:tt_face_load_loca
+   fun:tt_face_init
+   fun:open_face
+   fun:ft_open_face_internal
+   fun:FT_Open_Face
+   fun:_ZN2sf4Font18openFromStreamImplERNS_11InputStreamESt17basic_string_viewIcSt11char_traitsIcEE
+   fun:_ZN2sf4Font12openFromFileERKNSt10filesystem7__cxx114pathE
+}
+==27971== 75,961 (2,128 direct, 73,833 indirect) bytes in 1 blocks are definitely lost in loss record 3,807 of 3,843
+==27971==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x2C279F: ft_alloc (ftsystem.c:113)
+==27971==    by 0x221493: ft_mem_qalloc (ftutil.c:75)
+==27971==    by 0x2213D7: ft_mem_alloc (ftutil.c:54)
+==27971==    by 0x2C7317: af_face_globals_get_metrics (afglobal.c:458)
+==27971==    by 0x2D03A3: af_loader_load_glyph (afloader.c:301)
+==27971==    by 0x2D1A7F: af_autofitter_load_glyph (afmodule.c:488)
+==27971==    by 0x2139D3: FT_Load_Glyph (ftobjs.c:1060)
+==27971==    by 0x213DDB: FT_Load_Char (ftobjs.c:1245)
+==27971==    by 0x186A2F: sf::Font::loadGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:489)
+==27971==    by 0x185D87: sf::Font::getGlyph(char32_t, unsigned int, bool, float) const (Font.cpp:253)
+==27971==    by 0x1DF947: sf::Text::ensureGeometryUpdate() const (Text.cpp:385)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:ft_alloc
+   fun:ft_mem_qalloc
+   fun:ft_mem_alloc
+   fun:af_face_globals_get_metrics
+   fun:af_loader_load_glyph
+   fun:af_autofitter_load_glyph
+   fun:FT_Load_Glyph
+   fun:FT_Load_Char
+   fun:_ZNK2sf4Font9loadGlyphEDijbf
+   fun:_ZNK2sf4Font8getGlyphEDijbf
+   fun:_ZNK2sf4Text20ensureGeometryUpdateEv
+}
+==27971== LEAK SUMMARY:
+==27971==    definitely lost: 2,128 bytes in 1 blocks
+==27971==    indirectly lost: 73,681 bytes in 67 blocks
+==27971==      possibly lost: 0 bytes in 0 blocks
+==27971==    still reachable: 1,120 bytes in 13 blocks
+==27971==         suppressed: 30,936,049 bytes in 28,145 blocks
+==27971== 
+==27971== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 661 from 659)
+==27971== 
+==27971== 1 errors in context 1 of 2:
+==27971== Mismatched new/delete size value: 72
+==27971==    at 0x4888F60: operator delete(void*, unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x120423: std::default_delete<Scene>::operator()(Scene*) const (unique_ptr.h:93)
+==27971==    by 0x11FFAF: std::unique_ptr<Scene, std::default_delete<Scene> >::~unique_ptr() (unique_ptr.h:398)
+==27971==    by 0x134A37: void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> > >(std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:151)
+==27971==    by 0x1346E3: void std::_Destroy_aux<false>::__destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:163)
+==27971==    by 0x134343: void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (stl_construct.h:196)
+==27971==    by 0x133ED3: _Destroy<std::unique_ptr<Scene>*, std::unique_ptr<Scene> > (alloc_traits.h:944)
+==27971==    by 0x133ED3: std::vector<std::unique_ptr<Scene, std::default_delete<Scene> >, std::allocator<std::unique_ptr<Scene, std::default_delete<Scene> > > >::~vector() (stl_vector.h:735)
+==27971==    by 0x133A3B: SceneManager::~SceneManager() (scenemanager.cpp:13)
+==27971==    by 0x11F2CB: Engine::~Engine() (engine.cpp:19)
+==27971==    by 0x11F07B: main (main.cpp:13)
+==27971==  Address 0x28d1b350 is 0 bytes inside a block of size 1,056 alloc'd
+==27971==    at 0x48859FC: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==27971==    by 0x11FCC7: std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (unique_ptr.h:1076)
+==27971==    by 0x11F33F: Engine::start() (engine.cpp:25)
+==27971==    by 0x11F06F: main (main.cpp:10)
+==27971== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:SizeMismatch
+   fun:_ZdlPvm
+   fun:_ZNKSt14default_deleteI5SceneEclEPS0_
+   fun:_ZNSt10unique_ptrI5SceneSt14default_deleteIS0_EED1Ev
+   fun:_ZSt8_DestroyISt10unique_ptrI5SceneSt14default_deleteIS1_EEEvPT_
+   fun:_ZNSt12_Destroy_auxILb0EE9__destroyIPSt10unique_ptrI5SceneSt14default_deleteIS3_EEEEvT_S8_
+   fun:_ZSt8_DestroyIPSt10unique_ptrI5SceneSt14default_deleteIS1_EEEvT_S6_
+   fun:_Destroy<std::unique_ptr<Scene>*, std::unique_ptr<Scene> >
+   fun:_ZNSt6vectorISt10unique_ptrI5SceneSt14default_deleteIS1_EESaIS4_EED1Ev
+   fun:_ZN12SceneManagerD1Ev
+   fun:_ZN6EngineD1Ev
+   fun:main
+}
+--27971-- 
+--27971-- used_suppression:    842 <libgallium-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:2 suppressed: 30,202,816 bytes in 23,962 blocks
+--27971-- used_suppression:     89 <_Znwm-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:82 suppressed: 420,494 bytes in 427 blocks
+--27971-- used_suppression:    106 <libGLX_mesa-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:8 suppressed: 172,354 bytes in 520 blocks
+--27971-- used_suppression:     14 <dl_-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:76 suppressed: 98,048 bytes in 125 blocks
+--27971-- used_suppression:    140 <libX11-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:26 suppressed: 93,534 bytes in 511 blocks
+--27971-- used_suppression:   2597 <libLLVM-Leak> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:20 suppressed: 107,043 bytes in 2,600 blocks
+--27971-- used_suppression:      4 <libLLVM-Cond> /workspaces/gale93-randballs/dev/valgrind/randballs.valgrind.supp:14
+==27971== 
+==27971== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 661 from 659)

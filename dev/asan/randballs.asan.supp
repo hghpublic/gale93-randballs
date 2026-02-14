@@ -1,0 +1,21 @@
+# Maelstrom.asan.supp
+# AddressSanitizer Suppression File
+# https://clang.llvm.org/docs/AddressSanitizer.html
+
+# Suppress indirect leaks from external graphics libraries
+
+# Mesa OpenGL driver leaks
+leak:libGLX_mesa.so.0
+
+leak:libasound.so.2
+
+# GLU library leaks
+#leak:libGLU.so.1
+
+# Generic patterns (if library versions change)
+#leak:libgallium*.so
+#leak:libGLU.so*
+
+# Optional: suppress all indirect leaks from system libraries
+# leak:/lib/
+# leak:/usr/lib/

@@ -1,0 +1,33 @@
+=================================================================
+==18218==ERROR: AddressSanitizer: new-delete-type-mismatch on 0x519000126680 in thread T0:
+  object passed to delete has wrong type:
+  size of the allocated type:   1056 bytes;
+  size of the deallocated type: 72 bytes.
+    #0 0xffffaf709444 in operator delete(void*, unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:164
+    #1 0xaaaab418b024 in std::default_delete<Scene>::operator()(Scene*) const /usr/include/c++/14/bits/unique_ptr.h:93
+    #2 0xaaaab418abb0 in std::unique_ptr<Scene, std::default_delete<Scene> >::~unique_ptr() /usr/include/c++/14/bits/unique_ptr.h:398
+    #3 0xaaaab41a0638 in void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> > >(std::unique_ptr<Scene, std::default_delete<Scene> >*) (/workspaces/gale93-randballs/build/randballs+0x30638) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+    #4 0xaaaab41a02e4 in void std::_Destroy_aux<false>::__destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (/workspaces/gale93-randballs/build/randballs+0x302e4) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+    #5 0xaaaab419ff44 in void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*>(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*) (/workspaces/gale93-randballs/build/randballs+0x2ff44) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+    #6 0xaaaab419fad4 in void std::_Destroy<std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> > >(std::unique_ptr<Scene, std::default_delete<Scene> >*, std::unique_ptr<Scene, std::default_delete<Scene> >*, std::allocator<std::unique_ptr<Scene, std::default_delete<Scene> > >&) /usr/include/c++/14/bits/alloc_traits.h:944
+    #7 0xaaaab419fad4 in std::vector<std::unique_ptr<Scene, std::default_delete<Scene> >, std::allocator<std::unique_ptr<Scene, std::default_delete<Scene> > > >::~vector() /usr/include/c++/14/bits/stl_vector.h:735
+    #8 0xaaaab419f63c in SceneManager::~SceneManager() /workspaces/gale93-randballs/src/graphics/scenemanager.cpp:13
+    #9 0xaaaab4189ecc in Engine::~Engine() /workspaces/gale93-randballs/src/engine/engine.cpp:19
+    #10 0xaaaab4189bd8 in main /workspaces/gale93-randballs/src/main.cpp:13
+    #11 0xffffaed184c0 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #12 0xffffaed18594 in __libc_start_main_impl ../csu/libc-start.c:360
+    #13 0xaaaab41899ec in _start (/workspaces/gale93-randballs/build/randballs+0x199ec) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+
+0x519000126680 is located 0 bytes inside of 1056-byte region [0x519000126680,0x519000126aa0)
+allocated by thread T0 here:
+    #0 0xffffaf708324 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:95
+    #1 0xaaaab418a8c8 in std::__detail::_MakeUniq<GameScene>::__single_object std::make_unique<GameScene>() (/workspaces/gale93-randballs/build/randballs+0x1a8c8) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+    #2 0xaaaab4189f40 in Engine::start() /workspaces/gale93-randballs/src/engine/engine.cpp:25
+    #3 0xaaaab4189bcc in main /workspaces/gale93-randballs/src/main.cpp:10
+    #4 0xffffaed184c0 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0xffffaed18594 in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0xaaaab41899ec in _start (/workspaces/gale93-randballs/build/randballs+0x199ec) (BuildId: 82fcd708f2963da411a628bed6cd9d12575a6cd4)
+
+SUMMARY: AddressSanitizer: new-delete-type-mismatch ../../../../src/libsanitizer/asan/asan_new_delete.cpp:164 in operator delete(void*, unsigned long)
+==18218==HINT: if you don't care about these errors you may set ASAN_OPTIONS=new_delete_type_mismatch=0
+==18218==ABORTING

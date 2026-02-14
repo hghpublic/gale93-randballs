@@ -1,0 +1,28 @@
+[main] Building folder: /workspaces/gale93-randballs/build 
+[build] Starting build
+[proc] Executing command: /usr/local/bin/cmake --build /workspaces/gale93-randballs/build --config Debug --target all --
+[build] [14/23   4% :: 0.798] Scanning /workspaces/gale93-randballs/src/main.cpp for CXX dependencies
+[build] [15/23   8% :: 0.810] Generating CXX dyndep file CMakeFiles/randballs.dir/CXX.dd
+[build] [16/23  13% :: 0.829] Building CXX object src/graphics/CMakeFiles/graphics.dir/texturemanager.cpp.o
+[build] [16/23  17% :: 0.893] Building CXX object src/graphics/CMakeFiles/graphics.dir/scene.cpp.o
+[build] [16/23  21% :: 0.901] Building CXX object src/graphics/CMakeFiles/graphics.dir/scenemanager.cpp.o
+[build] [16/23  26% :: 0.911] Scanning /workspaces/gale93-randballs/src/engine/engine.cpp for CXX dependencies
+[build] [16/23  30% :: 0.915] Scanning /workspaces/gale93-randballs/src/engine/entitymanager.cpp for CXX dependencies
+[build] [17/23  34% :: 0.922] Generating CXX dyndep file src/engine/CMakeFiles/engine.dir/CXX.dd
+[build] [19/23  39% :: 0.962] Building CXX object src/systems/CMakeFiles/systems.dir/basesystem.cpp.o
+[build] [19/23  43% :: 1.108] Building CXX object src/systems/CMakeFiles/systems.dir/teleportsystem.cpp.o
+[build] [19/23  47% :: 1.330] Building CXX object src/systems/CMakeFiles/systems.dir/colorsystem.cpp.o
+[build] [19/23  52% :: 1.374] Building CXX object src/graphics/CMakeFiles/graphics.dir/gamescene.cpp.o
+[build] [19/23  56% :: 1.435] Building CXX object src/systems/CMakeFiles/systems.dir/movesystem.cpp.o
+[build] [19/23  60% :: 1.561] Building CXX object src/systems/CMakeFiles/systems.dir/rendersystem.cpp.o
+[build] [19/23  65% :: 1.574] Building CXX object src/systems/CMakeFiles/systems.dir/collisionsystem.cpp.o
+[build] [19/23  69% :: 1.606] Building CXX object CMakeFiles/randballs.dir/src/main.cpp.o
+[build] [19/23  73% :: 1.874] Building CXX object src/engine/CMakeFiles/engine.dir/engine.cpp.o
+[build] [19/23  78% :: 2.165] Building CXX object src/systems/CMakeFiles/systems.dir/usersystem.cpp.o
+[build] [20/23  82% :: 2.173] Building CXX object src/engine/CMakeFiles/engine.dir/entitymanager.cpp.o
+[build] [21/23  86% :: 2.244] Linking CXX static library src/engine/libengine.a
+[build] [22/23  91% :: 2.352] Linking CXX static library src/graphics/libgraphics.a
+[build] [22/23  95% :: 2.505] Linking CXX static library src/systems/libsystems.a
+[build] [23/23 100% :: 2.908] Linking CXX executable randballs
+[driver] Build completed: 00:00:02.921
+[build] Build finished with exit code 0

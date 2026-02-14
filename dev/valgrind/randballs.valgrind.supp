@@ -1,0 +1,92 @@
+{
+   <libgallium-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libgallium-*.so
+}
+{
+   <libGLX_mesa-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libGLX_mesa.so.*
+}
+{
+   <libLLVM-Cond>
+   Memcheck:Cond
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libLLVM.so.*    
+}
+{
+   <libLLVM-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libLLVM.so.*    
+}
+{
+   <libX11-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libX11.so.*
+}
+{
+   <libasound-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libasound.so.*
+}
+{
+   <libdbus-Leak>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/aarch64-linux-gnu/libdbus-*.so.*
+}
+{
+   <MainSDL-Cond>
+   Memcheck:Cond
+   ...
+   fun:*MainSDL*
+
+}
+{
+   <SDL_-Leak>
+   Memcheck:Leak
+   ...
+   fun:SDL_*
+}
+{
+   <SDL_-Cond>
+   Memcheck:Cond
+   ...
+   fun:SDL_*
+}
+{
+   <SDLNet_-Param>
+   Memcheck:Param
+   socketcall.sendto(msg)
+   ...
+   fun:SDLNet_*
+}
+{
+   <pa_-Leak>
+   Memcheck:Leak
+   ...
+   fun:pa_*
+}
+{
+   <dl_-Leak>
+   Memcheck:Leak
+   ...
+   fun:*dl_*
+}
+{
+   <_Znwm-Leak>
+   Memcheck:Leak
+   ...
+   fun:_Znwm
+}
+{
+   <_Znam-Leak>
+   Memcheck:Leak
+   ...
+   fun:_Znam
+}
