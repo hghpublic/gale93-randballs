@@ -12,7 +12,7 @@ TextureManager::~TextureManager()
 void TextureManager::load(const std::string & name)
 {
 	textures[name] = sf::Texture();
-	textures[name].loadFromFile(name);
+	[[maybe_unused]] bool result = textures[name].loadFromFile(name);
 
 	textures[name].setSmooth(true);
 }
