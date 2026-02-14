@@ -1,17 +1,16 @@
 set(target graphics)
 add_library(${target})
+set_target_properties(${target} PROPERTIES FOLDER libs)
+target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
+target_link_libraries(${target} PRIVATE EnTT::EnTT)
+target_link_libraries(${target} PRIVATE engine)
 target_sources(${target} PRIVATE
     gamescene.cpp
     scene.cpp
     scenemanager.cpp
     texturemanager.cpp
 )
-set_target_properties(${target} PROPERTIES FOLDER libs)
-target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
-# target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
-target_link_libraries(${target} PRIVATE EnTT::EnTT)
-target_link_libraries(${target} PRIVATE engine)
 
 ###################################################################
 #  Graphics Library

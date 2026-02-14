@@ -1,5 +1,9 @@
 set(target systems)
 add_library(${target})
+set_target_properties(${target} PROPERTIES FOLDER libs)
+target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
+target_link_libraries(${target} PRIVATE EnTT::EnTT)
 target_sources(${target} PRIVATE
     basesystem.cpp
     collisionsystem.cpp
@@ -9,11 +13,6 @@ target_sources(${target} PRIVATE
     teleportsystem.cpp
     usersystem.cpp
 )
-set_target_properties(${target} PROPERTIES FOLDER libs)
-target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
-# target_include_directories(${target} PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_link_libraries(${target} PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
-target_link_libraries(${target} PRIVATE EnTT::EnTT)
 
 ###################################################################
 #  Systems Library
