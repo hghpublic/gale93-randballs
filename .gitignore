@@ -337,3 +337,6 @@ build/*
 
 # macos
 .DS_Store
+
+# dev
+!/dev/**/*.log
